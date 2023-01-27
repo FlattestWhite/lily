@@ -3,6 +3,7 @@ package commands
 import (
 	"context"
 	"fmt"
+	"github.com/filecoin-project/lotus/node/modules/lp2p"
 	"io/ioutil"
 	"path/filepath"
 
@@ -261,6 +262,7 @@ Note that jobs are not persisted between restarts of the daemon. See
 			node.Override(new(dtypes.Bootstrapper), isBootstrapper),
 			node.Override(new(dtypes.ShutdownChan), shutdown),
 			node.Base(),
+			node.Override(new(*lp2p.RawHost), modules.NewLibp2pConfig),
 			node.Repo(r),
 
 			node.Override(new(dtypes.UniversalBlockstore), modules.NewCachingUniversalBlockstore),
