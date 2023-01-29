@@ -3,7 +3,6 @@ package commands
 import (
 	"context"
 	"fmt"
-	"github.com/filecoin-project/lotus/node/modules/lp2p"
 	"io/ioutil"
 	"path/filepath"
 
@@ -17,6 +16,7 @@ import (
 	"github.com/filecoin-project/lotus/node"
 	lotusmodules "github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/lp2p"
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/mitchellh/go-homedir"
 	"github.com/multiformats/go-multiaddr"
@@ -262,7 +262,7 @@ Note that jobs are not persisted between restarts of the daemon. See
 			node.Override(new(dtypes.Bootstrapper), isBootstrapper),
 			node.Override(new(dtypes.ShutdownChan), shutdown),
 			node.Base(),
-			node.Override(new(*lp2p.RawHost), modules.NewLibp2pConfig),
+			node.Override(new(lp2p.RawHost), modules.NewHost),
 			node.Repo(r),
 
 			node.Override(new(dtypes.UniversalBlockstore), modules.NewCachingUniversalBlockstore),

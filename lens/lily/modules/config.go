@@ -31,7 +31,7 @@ func NewQueueCatalog(mctx helpers.MetricsCtx, lc fx.Lifecycle, cfg *config.Conf)
 	return distributed.NewCatalog(cfg.Queue)
 }
 
-func NewLibp2pConfig(mctx helpers.MetricsCtx, lc fx.Lifecycle, params lp2p.P2PHostIn) (*host.Host, error) {
+func NewHost(mctx helpers.MetricsCtx, lc fx.Lifecycle, params lp2p.P2PHostIn) (*host.Host, error) {
 	pkey := params.Peerstore.PrivKey(params.ID)
 	if pkey == nil {
 		return nil, fmt.Errorf("missing private key for node ID: %s", params.ID.Pretty())
